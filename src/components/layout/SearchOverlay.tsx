@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/stores/uiStore";
+import { BLUR_DATA_URL } from "@/lib/constants";
 
 const popularSearches = [
   "Air Max",
@@ -166,6 +167,8 @@ export default function SearchOverlay() {
                         fill
                         className="object-cover"
                         sizes="56px"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                       />
                     </div>
                     <div className="flex-1 min-w-0">

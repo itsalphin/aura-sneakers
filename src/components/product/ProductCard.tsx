@@ -10,6 +10,7 @@ import { formatPrice } from '@/lib/utils';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useUIStore } from '@/stores/uiStore';
 import type { Product } from '@/types/product';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 interface ProductCardProps {
   product: Product;
@@ -73,6 +74,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               fill
               className="object-cover"
               sizes="(max-width: 768px) 50vw, 33vw"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
             />
           </motion.div>
 
@@ -92,6 +95,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             </motion.div>
           )}

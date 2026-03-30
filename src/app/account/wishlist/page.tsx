@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { formatPrice } from '@/lib/utils';
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useCartStore } from '@/stores/cartStore';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 export default function WishlistPage() {
   const items = useWishlistStore((s) => s.items);
@@ -90,6 +91,9 @@ export default function WishlistPage() {
                     src={item.image}
                     alt={item.name}
                     fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (

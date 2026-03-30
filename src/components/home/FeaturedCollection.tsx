@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { formatPrice } from '@/lib/utils';
 import { featuredProducts } from '@/lib/mockData';
 import { ShoppingBag } from 'lucide-react';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 export default function FeaturedCollection() {
   const titleRef = useRef<HTMLDivElement>(null);
@@ -73,6 +74,8 @@ export default function FeaturedCollection() {
                   alt={product.name}
                   fill
                   sizes="(max-width: 768px) 280px, (max-width: 1024px) 340px, 380px"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               )}

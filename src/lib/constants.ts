@@ -99,3 +99,7 @@ export const SORT_OPTIONS = [
 ] as const;
 
 export const ITEMS_PER_PAGE = 12;
+
+// Tiny dark SVG placeholder for smooth image fade-in
+export const BLUR_DATA_URL =
+  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzE0MTQxNCIvPjwvc3ZnPg==';

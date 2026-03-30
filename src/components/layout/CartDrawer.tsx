@@ -8,6 +8,7 @@ import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/utils";
 import { useUIStore } from "@/stores/uiStore";
+import { BLUR_DATA_URL } from "@/lib/constants";
 import { useCartStore } from "@/stores/cartStore";
 
 export default function CartDrawer() {
@@ -106,6 +107,8 @@ export default function CartDrawer() {
                           fill
                           className="object-cover"
                           sizes="64px"
+                          placeholder="blur"
+                          blurDataURL={BLUR_DATA_URL}
                         />
                       </div>
 

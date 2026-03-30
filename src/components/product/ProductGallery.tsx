@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 interface ProductGalleryProps {
   images: string[];
@@ -130,6 +131,8 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             </motion.div>
           </AnimatePresence>
@@ -161,6 +164,8 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                   fill
                   className="object-cover"
                   sizes="80px"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                 />
               </button>
             ))}
@@ -247,6 +252,8 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                   className="object-contain"
                   sizes="85vmin"
                   priority
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                   draggable={false}
                 />
               </div>

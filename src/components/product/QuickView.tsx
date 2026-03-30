@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { formatPrice } from '@/lib/utils';
 import { useUIStore } from '@/stores/uiStore';
 import { useCartStore } from '@/stores/cartStore';
+import { BLUR_DATA_URL } from '@/lib/constants';
 import { products } from '@/lib/mockData';
 import Modal from '@/components/ui/Modal';
 import SizeSelector from './SizeSelector';
@@ -71,6 +72,8 @@ export default function QuickView() {
             fill
             className="object-cover"
             sizes="256px"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
           />
         </div>
 

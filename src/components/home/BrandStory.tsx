@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import StatsCounter from './StatsCounter';
 import { brandImages } from '@/lib/mockData';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 const stats = [
   { target: 50000, suffix: '+', label: 'Pairs Sold' },
@@ -26,6 +27,8 @@ export default function BrandStory() {
           alt=""
           fill
           sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
           className="object-cover opacity-15"
           aria-hidden="true"
         />
@@ -96,6 +99,8 @@ export default function BrandStory() {
                 alt=""
                 fill
                 sizes="(max-width: 768px) 33vw, 400px"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
                 className="object-cover opacity-70 hover:opacity-90 transition-opacity duration-500"
                 aria-hidden="true"
               />

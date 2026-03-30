@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { formatPrice } from '@/lib/utils';
 import { useCartStore } from '@/stores/cartStore';
 import type { CartItem as CartItemType } from '@/types';
+import { BLUR_DATA_URL } from '@/lib/constants';
 
 interface CartItemProps {
   item: CartItemType;
@@ -35,6 +36,9 @@ export default function CartItem({ item, className }: CartItemProps) {
             src={item.image}
             alt={item.name}
             fill
+            sizes="80px"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
