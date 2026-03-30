@@ -45,7 +45,6 @@ export default function ColorSelector({ colors, selectedColor, onSelect }: Color
                   : 'ring-1 ring-white/10 hover:ring-white/40'
               )}
               style={{ backgroundColor: color.hex }}
-              aria-label={color.name}
             >
               {color.hex.toUpperCase() === '#FFFFFF' && (
                 <div className="absolute inset-0 rounded-full border border-white/20" />

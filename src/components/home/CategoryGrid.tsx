@@ -31,7 +31,7 @@ export default function CategoryGrid() {
               >
                 {/* Real photo background */}
                 <Image
-                  src={category.image}
+                  src={category.image || ''}
                   alt={category.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
