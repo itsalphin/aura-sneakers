@@ -1,22 +1,43 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface AboutVideoProps {
   src: string;
-  /** Fill the whole container as a background (overlays, dark tint, no controls) */
   mode?: 'background' | 'panel';
   className?: string;
 }
-const SKIP_START = 2;      // skip first 2 seconds
-const FADE_DURATION = 0.6; // seconds to crossfade
+const SKIP_START = 2;
+const FADE_DURATION = 0.6;
 
 export default function AboutVideo({ src, mode = 'panel', className = '' }: AboutVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(mode === 'background');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Lazy-load panel videos when they scroll into view
+  useEffect(() => {
+    if (mode === 'background') return;
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [mode]);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !isVisible) return;
 
     let rafId: number;
     let fadeInEnd = 0;
@@ -36,17 +57,14 @@ export default function AboutVideo({ src, mode = 'panel', className = '' }: Abou
       const fadeOutStart = dur - FADE_DURATION;
 
       if (now < fadeInEnd) {
-        // Fade in after loop reset
         video.style.opacity = String(
           Math.min(1, (now - (fadeInEnd - FADE_DURATION * 1000)) / (FADE_DURATION * 1000))
         );
       } else if (t >= dur - 0.05) {
-        // Hit end — reset to skip point and schedule fade-in
         video.currentTime = SKIP_START;
         video.style.opacity = '0';
         fadeInEnd = now + FADE_DURATION * 1000;
       } else if (t >= fadeOutStart) {
-        // Fade out as we near the end
         video.style.opacity = String(
           Math.max(0, 1 - (t - fadeOutStart) / FADE_DURATION)
         );
@@ -58,6 +76,7 @@ export default function AboutVideo({ src, mode = 'panel', className = '' }: Abou
     };
 
     const init = () => {
+      setIsLoaded(true);
       start();
       rafId = requestAnimationFrame(tick);
     };
@@ -71,7 +90,7 @@ export default function AboutVideo({ src, mode = 'panel', className = '' }: Abou
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [isVisible]);
 
   if (mode === 'background') {
     return (
@@ -81,11 +100,10 @@ export default function AboutVideo({ src, mode = 'panel', className = '' }: Abou
           src={src}
           muted
           playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover scale-105"
+          preload="metadata"
+          className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           aria-hidden="true"
         />
-        {/* Dark overlay */}
         <div
           className="absolute inset-0"
           style={{
@@ -97,16 +115,19 @@ export default function AboutVideo({ src, mode = 'panel', className = '' }: Abou
     );
   }
 
-  // Panel mode — fills its container, no extra overlays
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      muted
-      playsInline
-      preload="auto"
-      className={`w-full h-full object-cover ${className}`}
-      aria-hidden="true"
-    />
+    <div ref={containerRef} className={`w-full h-full ${className}`}>
+      {isVisible && (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          playsInline
+          preload="metadata"
+          className={`w-full h-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden="true"
+        />
+      )}
+    </div>
   );
 }

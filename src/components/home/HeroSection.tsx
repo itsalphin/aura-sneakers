@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
@@ -12,6 +12,7 @@ const CLIP_DURATION = 5; // seconds mapped across the scroll range
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -32,6 +33,7 @@ export default function HeroSection() {
     };
 
     const attach = () => {
+      setIsVideoReady(true);
       scrub();
       window.addEventListener('scroll', scrub, { passive: true });
     };
@@ -60,8 +62,8 @@ export default function HeroSection() {
           src={VIDEO_SRC}
           muted
           playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover z-0 scale-105"
+          preload="metadata"
+          className={`absolute inset-0 w-full h-full object-cover z-0 scale-105 transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
           aria-hidden="true"
         />
 
