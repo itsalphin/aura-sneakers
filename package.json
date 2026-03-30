@@ -1,26 +1,59 @@
 {
-  "name": "aura",
+  "name": "aura-sneakers",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
-    "next": "16.2.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "@auth/prisma-adapter": "^2.11.1",
+    "@gsap/react": "^2.1.2",
+    "@prisma/client": "^6.19.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@sanity/image-url": "^2.1.0",
+    "@stripe/stripe-js": "^4.10.0",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "gsap": "^3.14.2",
+    "lenis": "^1.3.21",
+    "lucide-react": "^1.7.0",
+    "next": "^16.2.1",
+    "next-auth": "^5.0.0-beta.30",
+    "next-sanity": "^9.12.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanity": "^3.0.0",
+    "stripe": "^17.7.0",
+    "tailwind-merge": "^2.6.1",
+    "three": "^0.183.2",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.19.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.183.1",
+    "eslint": "^10.1.0",
+    "eslint-config-next": "^16.2.1",
+    "prisma": "^6.19.2",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
